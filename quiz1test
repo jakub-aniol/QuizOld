@@ -1,0 +1,10 @@
+?Pytanie1 %JavaCore #4 *true
+!Odpowiedz zła pierwsza %JavaCore ^1 *false
+!Odpowiedź zła pierwsza %JavaCore ^11 *false
+!Odpowiedx pierwsza dobra %JavaCore ^2 *true
+!Odpowiedx pierwsza dobra %JavaCore ^2 *true
+?Pytanie2 %SQL #4 *false
+!Odpowiedz zła druga %SQL ^-1 *false
+!Odpowiedź zła druga %SQL ^0 *false
+!Odpowiedx druga zła %SQL ^22 *true
+!Odpowiedx druga zła %SQL ^3 *true
