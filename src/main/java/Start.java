@@ -1,6 +1,7 @@
 import entityFactory.DAO;
 import manualQuizBuilding.QuestionCreator;
 import manualQuizBuilding.QuizCreator;
+import org.apache.log4j.Logger;
 import presentingQuiz.QuizPresenter;
 import settings.Question;
 import settings.Quiz;
@@ -13,7 +14,7 @@ import java.util.Scanner;
  * Created by jakub on 18.04.16.
  */
 public class Start {
-
+    final static Logger logger = Logger.getLogger("Nowy logger");
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -30,6 +31,7 @@ public class Start {
             QuizCreator quizCreator = new QuizCreator();
 
             Quiz quiz = quizCreator.makeQuiz();
+            logger.error("Utworzono z pliku: "+quiz.getQuizName());
 
             QuizPresenter.showQuizToPractice(quiz);
 
@@ -48,6 +50,7 @@ public class Start {
             questionsList.add(question);
 
             Quiz quiz = quizCreator.makeQuiz(questionsList);
+            logger.info("Utworzono: " );
 
             QuizPresenter.showQuizToPractice(quiz);
 

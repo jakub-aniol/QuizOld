@@ -6,23 +6,26 @@ import javax.persistence.*;
  * Created by jakub on 18.04.16.
  */
 @Entity
-@Table(name = "Pytania")
+@Table(name = "Odpowiedzi")
 public class Answer implements Comparable<Answer> {
     @Id
     @GeneratedValue
-    int ID;
+    private int ID;
     @Column(name = "Odpowiedź")
     String answerName;
-    @Column(name = "Kategoria")
+    @Enumerated(EnumType.STRING)
     Category category;
     @Column(name = "Ilosc_punktow")
     int answerPoints;
-    @Column(name = "ID_Odpowiedzi")
-    int answerID;
     @Column(name = "Czy_wybrana")
     boolean isChoosen;
     @Column(name = "Czy_prawdziwa")
     boolean isProper;
+    @ManyToOne
+    @JoinColumn(name="ODP_Id")
+    private Question question;
+
+    public Answer(){}
 
     public Answer(String answerName, Category category, int answerPoints, boolean isProper) {
         this.answerName = answerName;
@@ -46,6 +49,56 @@ public class Answer implements Comparable<Answer> {
     public boolean getChoosen() {
         return this.isChoosen;
     }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getAnswerName() {
+        return answerName;
+    }
+
+    public void setAnswerName(String answerName) {
+        this.answerName = answerName;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setAnswerPoints(int answerPoints) {
+        this.answerPoints = answerPoints;
+    }
+
+    public boolean isChoosen() {
+        return isChoosen;
+    }
+
+    public boolean isProper() {
+        return isProper;
+    }
+
+    public void setProper(boolean proper) {
+        isProper = proper;
+    }
+
+
 
     @Override
     public int compareTo(Answer o) {
@@ -76,7 +129,7 @@ public class Answer implements Comparable<Answer> {
     }
     @Override
     public int hashCode(){
-        return this.category.hashCode()*this.answerName.hashCode()*this.answerID;
+        return this.category.hashCode()*this.answerName.hashCode()*this.getID();
     }
 
 

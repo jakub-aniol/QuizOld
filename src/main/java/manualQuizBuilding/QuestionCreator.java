@@ -1,5 +1,6 @@
 package manualQuizBuilding;
 
+import entityFactory.DAO;
 import settings.Answer;
 import settings.Category;
 import settings.Question;
@@ -29,8 +30,11 @@ public class QuestionCreator {
         String strCategory = asignToCategory();
 
         asignAnswers(answerList, ansNumber, strCategory);
+        Question question = new Question(questionName, Category.valueOf(strCategory), multiply, ansNumber, answerList);
 
-        return new Question(questionName, Category.valueOf(strCategory), multiply, ansNumber, answerList);
+        DAO.addingDbQuestion(question);
+
+                return question;
     }
 
     private static void asignAnswers(List<Answer> answerList, int ansNumber, String strCategory) {

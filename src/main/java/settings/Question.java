@@ -1,5 +1,6 @@
 package settings;
 
+import javax.persistence.*;
 import java.util.List;
 
 import static java.util.Collections.max;
@@ -7,7 +8,11 @@ import static java.util.Collections.max;
 /**
  * Created by jakub on 18.04.16.
  */
+@Entity(name = "Pytania")
 public class Question {
+    @Id
+    @GeneratedValue
+    private int Id;
     public int maxPoints;
     private String questionName;
     private Category category;
@@ -15,7 +20,13 @@ public class Question {
     private int numberOfAnswers;
     private boolean isMultiply;
     private int gainedPoints;
+    @OneToMany
     private List<Answer> answerList;
+    @ManyToOne
+    @JoinColumn(name="Quiz_ID")
+    private Quiz quiz;
+
+    public Question(){}
 
     public Question(String questionName, Category category, boolean isMultiply, int numberOfAnswers, List<Answer> answer) {
         this.questionName = questionName;
@@ -53,6 +64,56 @@ public class Question {
         return this.questionName;
     }
 
+    public void setQuestionName(String questionName) {
+        this.questionName = questionName;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public int geteIDPytanie() {
+        return eIDPytanie;
+    }
+
+    public void seteIDPytanie(int eIDPytanie) {
+        this.eIDPytanie = eIDPytanie;
+    }
+
+    public int getNumberOfAnswers() {
+        return numberOfAnswers;
+    }
+
+    public void setNumberOfAnswers(int numberOfAnswers) {
+        this.numberOfAnswers = numberOfAnswers;
+    }
+
+    public void setMultiply(boolean multiply) {
+        isMultiply = multiply;
+    }
+
+    public void setAnswerList(List<Answer> answerList) {
+        this.answerList = answerList;
+    }
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
 
     /**
      * Created by jakub on 18.04.16.
