@@ -1,14 +1,27 @@
 package settings;
 
+import javax.persistence.*;
+
 /**
  * Created by jakub on 18.04.16.
  */
+@Entity
+@Table(name = "Pytania")
 public class Answer implements Comparable<Answer> {
+    @Id
+    @GeneratedValue
+    int ID;
+    @Column(name = "Odpowiedź")
     String answerName;
+    @Column(name = "Kategoria")
     Category category;
+    @Column(name = "Ilosc_punktow")
     int answerPoints;
+    @Column(name = "ID_Odpowiedzi")
     int answerID;
+    @Column(name = "Czy_wybrana")
     boolean isChoosen;
+    @Column(name = "Czy_prawdziwa")
     boolean isProper;
 
     public Answer(String answerName, Category category, int answerPoints, boolean isProper) {
@@ -23,10 +36,6 @@ public class Answer implements Comparable<Answer> {
     }
 
     public boolean getIsProper() {
-        return isProper;
-    }
-
-    public boolean isProper() {
         return isProper;
     }
 
@@ -47,10 +56,10 @@ public class Answer implements Comparable<Answer> {
     public String toString() {
         String strReturn ="";
         strReturn += this.answerName;
+        strReturn += "  " +this.answerPoints+ "   "+this.isChoosen;
         strReturn +="\n";
 
         return strReturn;
-
     }
 
     @Override

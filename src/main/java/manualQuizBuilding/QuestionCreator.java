@@ -14,6 +14,7 @@ import java.util.Scanner;
  */
 
 public class QuestionCreator {
+    private static Scanner scanner = new Scanner(System.in);
 
     public static Question creatigQuestion() {
         Scanner scanner = new Scanner(System.in);
@@ -25,23 +26,21 @@ public class QuestionCreator {
 
         boolean multiply = decideMultipilty(ansNumber);
 
-        String strCategory = asignToCategory(scanner);
+        String strCategory = asignToCategory();
 
         asignAnswers(answerList, ansNumber, strCategory);
-
-        scanner.close();
 
         return new Question(questionName, Category.valueOf(strCategory), multiply, ansNumber, answerList);
     }
 
     private static void asignAnswers(List<Answer> answerList, int ansNumber, String strCategory) {
         System.out.println("Przypisuj odpowiedzi");
-        for(int i=0; i<ansNumber; i++) {
+        for (int i = 0; i < ansNumber; i++) {
             answerList.add(AnswerCreator.creatingAnswer(Category.valueOf(strCategory)));
         }
     }
 
-    private static String asignToCategory(Scanner scanner) {
+    private static String asignToCategory() {
         System.out.println("Wybierz kategorię");
         System.out.println(Arrays.toString(Category.values()));
 
@@ -57,14 +56,13 @@ public class QuestionCreator {
     }
 
     private static boolean decideMultipilty(int ansNumber) {
-        boolean wielokrotnie;
+        boolean wielokrotnie = true;
         if (ansNumber > 1)
-            wielokrotnie = true;
-        else wielokrotnie = false;
-        return wielokrotnie;
+            return wielokrotnie;
+        return !wielokrotnie;
     }
 
-    private static int decideAnswersNumber(Scanner scanner){
+    private static int decideAnswersNumber(Scanner scanner) {
         System.out.println("Podaj ilość odpowiedzi");
         int ansNumber;
         try {

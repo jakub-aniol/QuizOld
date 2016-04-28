@@ -57,7 +57,7 @@ public class QuizFileReader {
                     answer = new Answer(answerName, enCategory, pointsbyAnser, isAnswerCorrect);
                     answerList.add(answer);
 
-                    question.countingMaxPoints(answerList);
+                    question.countingMaxPoints();
 
                 }
             }

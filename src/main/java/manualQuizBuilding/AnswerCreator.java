@@ -1,5 +1,6 @@
 package manualQuizBuilding;
 
+import entityFactory.DAO;
 import settings.Answer;
 import settings.Category;
 
@@ -9,16 +10,17 @@ import java.util.Scanner;
  * Created by jakub on 18.04.16.
  */
 public class AnswerCreator {
+    private static Scanner scanner = new Scanner(System.in);
 
     public static Answer creatingAnswer(Category category) {
-        Scanner scanner = new Scanner(System.in);
-
         String answerName = decideAnswerName(scanner);
         int points = decideMaxPoints(scanner);
         boolean isTrue = isAnswerCorrect(scanner);
 
-        return new Answer(answerName, category, points, isTrue);
+        Answer answer = new Answer(answerName, category, points, isTrue);
+        DAO.addingDbAnswer(answer);
 
+        return answer;
     }
 
     private static int decideMaxPoints(Scanner scanner) {
@@ -44,11 +46,10 @@ public class AnswerCreator {
     //można ustawić tak że jak za odpowiedx beda punkty to z automatu ustawi na prawdziwa jak jak bedzie mniej lub rowne zero to na fałszywą
     private static boolean isAnswerCorrect(Scanner scanner) {
         System.out.println("czy odpowiedź jest prawdziwa? Jeśli tak wpisz T, w przeciwnym razie będzie fałszywa");
-        String rightAnswer = null;
+        String rightAnswer;
         boolean isTrue = true;
         rightAnswer = scanner.nextLine();
         if (rightAnswer.equals("t") || rightAnswer.equals("T")){
-            isTrue = true;
             return isTrue;
         }
         else
